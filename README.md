@@ -59,6 +59,10 @@ For this project, we have utilized three transformations, namely share range, zo
 
 ## 5. Model Building 
 
+Convolutional Neural Networks come in many different variants, this is our CNN architecture for solving our task.
+![]()
+
+This architecture is a traditional Feed Forward Network trained via back-propagation. In the context of this image, Feed Forward means that incoming data flows downwards through the layers. During training, weights in each layer (including Convolutional Filters) are updated from the bottom up, using back-propagation.
 
 
 
