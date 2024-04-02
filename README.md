@@ -30,4 +30,26 @@ The sample images of COVID-19 CXR leave no doubt that normal CXR images depict c
 pattern in both the left and right lungs, while COVID-19 CXR images clearly show ground-glass opacification and consolidation in the right upper lobe and left lower lobe.
 
 
+## 3. Data Loading & Image pre-processing
+
+In this step, we loaded the data and performed pre-processing of chest x-ray images so that model can understand the pattern hidden in the image for a particular class.
+
+After loading the images, we reside the images to a uniform size of 224x224 pixels. We then assigned label values
+of 0, 1, and 2 to the classes Normal, COVID-19, and Virus Infection, respectively. 
+
+Next, we randomized the order so that they were not sorted according to any
+specific pattern during the training of
+our CNN model. This helps to prevent
+any bias towards a particular order and
+improves the overall performance of
+the model.
+
+Finally, we split our training data into training and validation sets with an 80:20 ratio. We used 80% of the data for training and the remaining 20% for evaluating the model.
+
+## 4. Image Normalization and Augmentation
+
+
+
+
+
 
