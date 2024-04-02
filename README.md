@@ -48,6 +48,17 @@ Finally, we split our training data into training and validation sets with an 80
 
 ## 4. Image Normalization and Augmentation
 
+In this step, we normalized the given data by dividing it by 255. This was done to ensure that the data falls within the range of 0 to 1.
+
+Then, we have implemented image augmentation to enhance the training data and build a more reliable model. Image augmentation is a technique in which we apply various transformations
+to the training images, resulting in the
+introduction of some noise that helps in
+creating a robust model. 
+
+For this project, we have utilized three transformations, namely share range, zoom range, and horizontal flip. 
+
+## 5. Model Building 
+
 
 
 
