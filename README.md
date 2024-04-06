@@ -70,5 +70,8 @@ After training our model we will be checking the overall training history of our
 
 As we can see from the above plots, the model’s validation accuracy and validation loss stabilized after 10 epochs to over 90%.
 
+* Test loss: 0.0334
+* Test accuracy: 0.9945
+
 
 
