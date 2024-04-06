@@ -64,7 +64,11 @@ Convolutional Neural Networks come in many different variants, this is our CNN a
 
 This architecture is a traditional Feed Forward Network trained via back-propagation. In the context of this image, Feed Forward means that incoming data flows downwards through the layers. During training, weights in each layer (including Convolutional Filters) are updated from the bottom up, using back-propagation.
 
+## 6. Model Evaluation 
+After training our model we will be checking the overall training history of our model.
+![](https://github.com/SawsanYusuf/COVID-19-Detection-using-CNN/blob/main/Images/Performance.png)
 
+As we can see from the above plots, the model’s validation accuracy and validation loss stabilized after 10 epochs to over 90%.
 
 
 
