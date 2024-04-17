@@ -74,6 +74,10 @@ We will also be using callbacks to perform specific actions at different stages 
 
 In our case, we will be using the ReduceLROnPlateau callback to decrease the learning rate of the model by a factor of 0.2 if its validation loss does not improve for two consecutive epochs. Additionally, we will use the early_stopping callback to stop the training process when the validation loss metric stops improving.
 
+### **Model fitting**
+
+In this step, we will actually fit the model for performing training of the model. For training the model, we are using a number of epochs of 30.
+
 ## 6. Model Evaluation 
 After training our model we will be checking the overall training history of our model.
 ![](https://github.com/SawsanYusuf/COVID-19-Detection-using-CNN/blob/main/Images/Performance.png)
