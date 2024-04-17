@@ -64,6 +64,16 @@ Convolutional Neural Networks come in many different variants, this is our CNN a
 
 This architecture is a traditional Feed Forward Network trained via back-propagation. In the context of this image, Feed Forward means that incoming data flows downwards through the layers. During training, weights in each layer (including Convolutional Filters) are updated from the bottom up, using back-propagation.
 
+After creating the model, we need to **compile** it by setting up various components such as the optimizer, loss function, and metric function. In our case, we will be using the Adam optimizer, which combines the benefits of two other stochastic gradient descent extensions.
+
+One of these extensions is the Adaptive Gradient Algorithm (AdaGrad), which enhances performance on tasks having sparse gradients such as natural language processing and computer vision problems. The other is Root Mean Square Propagation (RMSProp), which adapts per-parameter learning rates based on the recent magnitudes of the gradients, making it suitable for online and non-stationary problems.
+
+We will be using the categorical_crossentropy loss function since we have more than two classes to classify. Additionally, we will use the "accuracy" metric function to evaluate the performance of our model. This metric function is similar to the loss function, except that its results are not used for training the model, but only for evaluation purposes.
+
+We will also be using callbacks to perform specific actions at different stages of training. Callbacks can be used for multiple tasks during training such as saving the best weights of the model to disk periodically, reducing the learning rate of the model, and stopping the training process if the validation loss metric does not improve.
+
+In our case, we will be using the ReduceLROnPlateau callback to decrease the learning rate of the model by a factor of 0.2 if its validation loss does not improve for two consecutive epochs. Additionally, we will use the early_stopping callback to stop the training process when the validation loss metric stops improving.
+
 ## 6. Model Evaluation 
 After training our model we will be checking the overall training history of our model.
 ![](https://github.com/SawsanYusuf/COVID-19-Detection-using-CNN/blob/main/Images/Performance.png)
