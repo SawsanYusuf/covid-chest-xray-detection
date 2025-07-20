@@ -62,11 +62,11 @@ The trained CNN model's performance was evaluated on both an internal validation
 
 * **Training & Validation Curves:** Plots showing the training and validation accuracy and loss over epochs. These indicate strong learning and good convergence, with no significant overfitting observed in terms of loss trends, though accuracy shows the model's struggle to differentiate classes well.
 
-![]()
+![](https://github.com/SawsanYusuf/covid-chest-xray-detection/blob/main/Images/performance.png)
 
 * **Confusion Matrix:** A heatmap visualizing the model's predictions versus the true labels on the validation set, offering a detailed breakdown of correct and incorrect classifications for each class.
 
-![]()
+![](https://github.com/SawsanYusuf/covid-chest-xray-detection/blob/main/Images/confusion.png)
 
 
 ## Future Enhancements
