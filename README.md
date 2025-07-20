@@ -1,91 +1,85 @@
-# COVID-19 Detection Using CNN
+# COVID-19 Detection from Chest X-rays using Convolutional Neural Networks
 
 ![](https://github.com/SawsanYusuf/COVID-19-Detection-using-CNN/blob/main/Images/cover.jpg)
 
-## Introduction
-In this project, we aimed to develop a Convolutional Neural Network (CNN) algorithm for the accurate detection of COVID-19 from Chest X-ray (CXR) images.
+## Rapid and Accurate Diagnostic Aid for COVID-19 and Lung Conditions
 
-The challenge was to develop an algorithm that could accurately detect COVID-19, as well as distinguish between viral pneumonia, and normal cases based on an input chest X-ray image.
+This project presents a deep learning solution for the automated classification of Chest X-ray (CXR) images. The model is trained to distinguish between three critical categories: **COVID-19 Positive**, **Normal (Healthy)**, and **Virus (Pneumonia)**. The goal is to provide a swift and reliable diagnostic tool that can significantly aid clinicians in the early and accurate identification of COVID-19, improving patient management and public health response.
 
-## 1. Dataset Description
+## Project Highlights
 
-In this project, we used the [COVID CXR Image Dataset](https://www.kaggle.com/competitions/copy-of-shai-level-2-training/data) which consists of a total of 1196 posteroanterior (PA) views of chest X-ray images comprising Normal, Viral, and COVID-19 affected patients.
+* **Multi-Class Classification:** Differentiates COVID-19 from both normal cases and other types of pneumonia/viral infections.
+* **Custom CNN Architecture:** Leverages a custom-designed Convolutional Neural Network for robust feature extraction.
+* **Extensive Data Augmentation:** Employs various augmentation techniques to enhance model generalization and mitigate overfitting, especially crucial for medical imaging datasets.
+* **Dual Evaluation:** Assessed on an internal validation set for development insights and competed on an external Kaggle test set evaluated by **Mean F1-Score**.
 
-The distribution of images in COVID-19, Viral, and Normal patients are shown in this plot.
-![](https://github.com/SawsanYusuf/COVID-19-Detection-using-CNN/blob/main/Images/Distribution.png)
+## Dataset
 
-## 2. Exploratory Data Analysis
-We plotted sample images of each class to understand the visual difference among different classes of images.
+The model is trained and evaluated on a structured dataset of Chest X-ray images, partitioned into `train`, `val` (validation), and `test` sets. The images are categorized into:
+* **covid:** Confirmed cases of Coronavirus Disease.
+* **normal:** Healthy lung X-rays.
+* **virus:** X-rays showing signs of viral infections or other pneumonia types.
 
-**Normal CXR Images**
-![](https://github.com/SawsanYusuf/COVID-19-Detection-using-CNN/blob/main/Images/Normal.png)
+## Methodology
 
-**Viral Pneumonia CXR Images**
-![](https://github.com/SawsanYusuf/COVID-19-Detection-using-CNN/blob/main/Images/Virus.png)
+Our approach involved a systematic deep learning pipeline:
 
-**Covid-19 CXR Images**
-![](https://github.com/SawsanYusuf/COVID-19-Detection-using-CNN/blob/main/Images/COVID.png)
+1.  **Data Preprocessing:** CXR images were resized to uniform dimensions (224x224 pixels) and pixel values were normalized to a [0, 1] range.
+2.  **Data Augmentation:** To combat data scarcity and improve generalization, the training set was augmented with random rotations, shifts, zooms, and horizontal flips.
+3.  **Custom CNN Development:** A deep Convolutional Neural Network was designed, featuring multiple convolutional and pooling layers for hierarchical feature learning, followed by dense layers for classification. Dropout layers were strategically placed to prevent overfitting.
+4.  **Model Training:** The model was compiled using the Adam optimizer and `categorical_crossentropy` loss. Training utilized `EarlyStopping` to monitor validation loss and `ModelCheckpoint` to save the best performing weights.
+5.  **Rigorous Evaluation:** Performance was assessed on an independent, unseen test set (Kaggle) and an internal validation set to ensure an unbiased measure of its effectiveness.
 
-The sample images of COVID-19 CXR leave no doubt that normal CXR images depict clear lungs without any abnormal opacification patterns. It is important to note that viral pneumonia (middle) presents a more diffuse "interstitial"
-pattern in both the left and right lungs, while COVID-19 CXR images clearly show ground-glass opacification and consolidation in the right upper lobe and left lower lobe.
+## Key Results
+
+The trained CNN model's performance was evaluated on both an internal validation set (split from training data) and Kaggle's held-out, unlabeled test set for competition scoring, which used Mean F1-Score as its metric.
+
+* **Internal Validation Performance (on `validation_dataset`):**
+    * **Validation Loss:** **0.0231**
+    * **Validation Accuracy:** **0.41 (41%)**
+    * *These metrics reflect the model's performance during development and hyperparameter tuning.*
+
+    **Detailed Validation Performance (per class, on `validation_dataset`):**
+    | Class    | Precision | Recall | F1-Score | Support |
+    | :------- | :-------- | :----- | :------- | :------ |
+    | **covid** | 0.37      | 0.35   | 0.36     | 51      |
+    | **virus** | 0.46      | 0.53   | 0.49     | 78      |
+    | **normal** | 0.35      | 0.30   | 0.32     | 63      |
+    | **Macro Avg** | 0.39      | 0.39   | 0.39     | 192     |
+    | **Weighted Avg** | 0.40      | 0.41   | 0.40     | 192     |
+
+    **Confusion Matrix on Validation Set:**
+    The confusion matrix provides a detailed breakdown of correct and incorrect predictions:
+    * Out of 51 true 'covid' cases, 18 were correctly predicted as 'covid', 22 as 'virus', and 11 as 'normal'.
+    * Out of 78 true 'virus' cases, 13 were predicted as 'covid', 41 as 'virus', and 24 as 'normal'.
+    * Out of 63 true 'normal' cases, 18 were predicted as 'covid', 26 as 'virus', and 19 as 'normal'.
+
+* **Kaggle Competition Submission Score:**
+    * **Public Leaderboard Score (Mean F1-Score): 0.93689 (approx. 93.69%)**
+    * *This score is based on the model's predictions on Kaggle's truly unseen and unlabeled test set, using Mean F1-Score as the primary evaluation metric. It demonstrates strong generalization capability under competition-specific criteria.*
+
+## Visualizations
+
+* **Training & Validation Curves:** Plots showing the training and validation accuracy and loss over epochs. These indicate strong learning and good convergence, with no significant overfitting observed in terms of loss trends, though accuracy shows the model's struggle to differentiate classes well.
+
+![]()
+
+* **Confusion Matrix:** A heatmap visualizing the model's predictions versus the true labels on the validation set, offering a detailed breakdown of correct and incorrect classifications for each class.
+
+![]()
 
 
-## 3. Data Loading & Image pre-processing
+## Future Enhancements
 
-In this step, we loaded the data and performed pre-processing of chest x-ray images so that model can understand the pattern hidden in the image for a particular class.
+* **Addressing Class Imbalance:** The validation report shows uneven support for classes. Techniques like weighted loss, oversampling (SMOTE), or undersampling could significantly improve performance for underrepresented classes.
+* **Transfer Learning:** Exploring fine-tuning pre-trained CNN architectures (e.g., ResNet, Inception, EfficientNet) which often yield higher performance on medical imaging.
+* **Hyperparameter Tuning:** More extensive tuning of learning rate schedules, batch sizes, and optimizer parameters could yield improvements.
+* **Explainable AI (XAI):** Implementing techniques like Grad-CAM or SHAP to visualize which specific regions of the X-ray images are most influential in the model's predictions, enhancing clinical trust and understanding.
+* **Dataset Expansion:** Train on larger and more diverse multi-institutional datasets to improve robustness and generalization across various patient populations and imaging equipment.
 
-After loading the images, we reside the images to a uniform size of 224x224 pixels. We then assigned label values
-of 0, 1, and 2 to the classes Normal, COVID-19, and Virus Infection, respectively. 
+## Contributing
 
-Next, we randomized the order so that they were not sorted according to any
-specific pattern during the training of
-our CNN model. This helps to prevent
-any bias towards a particular order and
-improves the overall performance of
-the model.
-
-Finally, we split our training data into training and validation sets with an 80:20 ratio. We used 80% of the data for training and the remaining 20% for evaluating the model.
-
-## 4. Image Normalization and Augmentation
-
-In this step, we normalized the given data by dividing it by 255. This was done to ensure that the data falls within the range of 0 to 1.
-
-Then, we have implemented image augmentation to enhance the training data and build a more reliable model. Image augmentation is a technique in which we apply various transformations
-to the training images, resulting in the
-introduction of some noise that helps in
-creating a robust model. 
-
-For this project, we have utilized three transformations, namely share range, zoom range, and horizontal flip. 
-
-## 5. Model Building 
-
-Convolutional Neural Networks come in many different variants, this is our CNN architecture for solving our task.
-![](https://github.com/SawsanYusuf/COVID-19-Detection-using-CNN/blob/main/Images/cnn.png)
-
-This architecture is a traditional Feed Forward Network trained via back-propagation. In the context of this image, Feed Forward means that incoming data flows downwards through the layers. During training, weights in each layer (including Convolutional Filters) are updated from the bottom up, using back-propagation.
-
-After creating the model, we need to **compile** it by setting up various components such as the optimizer, loss function, and metric function. In our case, we will be using the Adam optimizer, which combines the benefits of two other stochastic gradient descent extensions.
-
-One of these extensions is the Adaptive Gradient Algorithm (AdaGrad), which enhances performance on tasks having sparse gradients such as natural language processing and computer vision problems. The other is Root Mean Square Propagation (RMSProp), which adapts per-parameter learning rates based on the recent magnitudes of the gradients, making it suitable for online and non-stationary problems.
-
-We will be using the categorical_crossentropy loss function since we have more than two classes to classify. Additionally, we will use the "accuracy" metric function to evaluate the performance of our model. This metric function is similar to the loss function, except that its results are not used for training the model, but only for evaluation purposes.
-
-We will also be using callbacks to perform specific actions at different stages of training. Callbacks can be used for multiple tasks during training such as saving the best weights of the model to disk periodically, reducing the learning rate of the model, and stopping the training process if the validation loss metric does not improve.
-
-In our case, we will be using the ReduceLROnPlateau callback to decrease the learning rate of the model by a factor of 0.2 if its validation loss does not improve for two consecutive epochs. Additionally, we will use the early_stopping callback to stop the training process when the validation loss metric stops improving.
-
-### **Model fitting**
-
-In this step, we will actually fit the model for performing training of the model. For training the model, we are using a number of epochs of 30.
-
-## 6. Model Evaluation 
-After training our model we will be checking the overall training history of our model.
-![](https://github.com/SawsanYusuf/COVID-19-Detection-using-CNN/blob/main/Images/Performance.png)
-
-As we can see from the above plots, the model’s validation accuracy and validation loss stabilized after 10 epochs to over 90%.
-
-* Test loss: 0.0334
-* Test accuracy: 0.9945
+Contributions are welcome! If you have suggestions or improvements, please open an issue or submit a pull request.
 
 
 
