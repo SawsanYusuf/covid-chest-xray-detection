@@ -82,4 +82,7 @@ The trained CNN model's performance was evaluated on both an internal validation
 Contributions are welcome! If you have suggestions or improvements, please open an issue or submit a pull request.
 
 
+## Author
+**Sawsan Yousef** 
 
+*Data Scientist | Predictive Modeling | Computer Vision*
